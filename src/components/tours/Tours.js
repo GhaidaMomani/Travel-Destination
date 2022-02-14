@@ -1,19 +1,24 @@
 import React from "react";
 
 import data from "../../data/db.json";
+import { Link } from "react-router-dom";
+
+import Tour from './tour/Tour';
 
 function Tours() {
-  return<>
+ 
+ return <>
+ 
+ {
+   data.map((tour)=><Link key={tour.id}  to={`/city/${tour.id}`}>
+   <Tour  dataTour={tour}/>
+   </Link>)
+ }
   
-    {data.map((tour) => {
-      return (
-        <div>
-          <p>{tour.name}</p>
-          <img src={tour.image} alt ="Tour"/>
-        </div>
-      )
-    })}
   </>
+
 }
+
+
 
 export default Tours;
