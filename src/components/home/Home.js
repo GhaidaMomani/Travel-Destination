@@ -1,16 +1,24 @@
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
-import Tours from '../tours/Tours';
+
+import Header from "../header/Header";
+import Tours from "../tours/Tours";
+
+import Footer from "../footer/Footer";
 
 
-function Home(){
 
-return <>
- <Header/>
- <Footer/>
- <Tours/>
 
-</>
 
+function Home() {
+
+  return (
+    <>
+      <Header />
+ 
+ <Tours className="body"  />
+ 
+      <Footer />
+   
+    </>
+  );
 }
 export default Home;
