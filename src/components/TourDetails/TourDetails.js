@@ -1,47 +1,49 @@
-import React from 'react'
-import data from "../../data/db.json"
-import { useParams } from 'react-router-dom';
+import React from "react";
+import data from "../../data/db.json";
+import { useParams } from "react-router-dom";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
+import { useState } from 'react';
 
-function TourDetails(){
+function TourDetails() {
+  function findTour(id) {
+    return data.filter((tour) => {
+      return tour.id === id;
+    })[0];
+  }
 
-       
-    function findTour(id){
+  const { id } = useParams();
 
-        return data.filter((tour)=>{ return tour.id === id })[0];
+  const tourObj = findTour(id);
 
-    }
- 
+  const [readMore , setReadMore] = useState (false);
+  return (
+    <>
+      <Header />
+      <main>
+        <section>
+          <div className="tour-detail">
+            <p className>{tourObj.id}</p>
+            <p>{tourObj.name}</p>
+            <p>{tourObj.info}</p>
+            <p>{tourObj.price}</p>
+            <img src={tourObj.image} alt="" className="img" />
+            {/* <p >{tourObj.image}</p> */}
 
-    const {id} =useParams();
+            {readMore? tourObj.info : tourObj.info.substring(0,200)}
+            <button onClick={() => setReadMore(!readMore)} >
+                     {readMore? 'Show Less': 'Show More'}
+                 </button>
+            
+          </div>
 
-    const tourObj=findTour(id);
+          
+        </section>
+      </main>
 
-
-
-
-    return <>
-    
-    <Header/>
-<main>
-<section>
-<div className="tour-detail">
-<p className>{tourObj.id}</p>
-<p >{tourObj.name}</p>
-<p >{tourObj.info}</p>
-<p >{tourObj.price}</p>
-<p >{tourObj.image}</p>
-</div>
-
-
-</section>
-</main>
-
-    <Footer/>
-
+      <Footer />
     </>
-
+  );
 }
 
 export default TourDetails;
